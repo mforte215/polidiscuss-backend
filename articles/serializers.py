@@ -1,12 +1,16 @@
 from rest_framework import serializers
 from articles.models import Article
 from django.contrib.auth.models import User
+from taggit_serializer.serializers import (TagListSerializerField,
+                                           TaggitSerializer)
 
 
-class ArticleSerializer(serializers.ModelSerializer):
+class ArticleSerializer(TaggitSerializer, serializers.ModelSerializer):
+    tags = TagListSerializerField()
+
     class Meta:
         model = Article
-        fields = ['id', 'title', 'author', 'content']
+        fields = ['id', 'title', 'subtitle', 'image_url', 'author', 'content', 'tags']
     
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)

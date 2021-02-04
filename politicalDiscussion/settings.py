@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'articles.apps.ArticlesConfig',
+    'taggit',
+    'taggit_serializer',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ WSGI_APPLICATION = 'politicalDiscussion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'polidb',
+        'NAME': 'polidiscussnews',
         'USER': 'markf',
         'PASSWORD': 'Winkel1991',
         'HOST': 'localhost',
@@ -130,8 +132,10 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3030',
+    'http://localhost:3000',
 ] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
 CORS_ORIGIN_REGEX_WHITELIST = [
-    'http://localhost:3030',
+    'http://localhost:3000',
 ]
+
+TAGGIT_CASE_INSENSITIVE = True
