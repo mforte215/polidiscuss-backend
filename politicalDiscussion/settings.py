@@ -24,13 +24,15 @@ SECRET_KEY = 'mcrni&@sy)6c74=^x19c1@3oj9@ba^gi0l@(kqkt=(8-zc*$-t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+TAGGIT_CASE_INSENSITIVE = False
+ALLOWED_HOSTS = ['laptop-m3ofmrre',
+'127.0.0.1', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'articles.apps.ArticlesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'articles.apps.ArticlesConfig',
     'taggit',
     'taggit_serializer',
+    'oauth2_provider',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +85,7 @@ WSGI_APPLICATION = 'politicalDiscussion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'polidiscussnews',
+        'NAME': 'polidb',
         'USER': 'markf',
         'PASSWORD': 'Winkel1991',
         'HOST': 'localhost',
@@ -138,4 +141,20 @@ CORS_ORIGIN_REGEX_WHITELIST = [
     'http://localhost:3000',
 ]
 
-TAGGIT_CASE_INSENSITIVE = True
+AUTH_USER_MODEL = 'articles.User'
+LOGIN_URL='/admin/login/'
+
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+        'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}

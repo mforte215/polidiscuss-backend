@@ -15,6 +15,8 @@ class ArticleSerializer(TaggitSerializer, serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
         instance.content = validated_data.get('content', instance.content)
+        instance.subtitle = validated_data.get('subtitle', instance.subtitle)
+        instance.image_url = validated_data.get('image_url', instance.imague_url)
         instance.save()
         return instance
 
