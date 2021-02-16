@@ -9,14 +9,14 @@ from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, OAuth
 
 class ArticleList(generics.ListCreateAPIView):
     authentication_classes = [OAuth2Authentication]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, TokenHasReadWriteScope]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [OAuth2Authentication]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly, TokenHasReadWriteScope]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
